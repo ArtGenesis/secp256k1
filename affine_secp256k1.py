@@ -21,14 +21,14 @@ def checkpoint(x, y):
 
 def double(x, y):
     s = ((3 * x * x) * inverse_mod(2 * y, p)) % p
-    x2 = (s*s - 2 * x) % p
+    x2 = (s * s - 2 * x) % p
     y2 = (s * (x - x2) - y) % p
     return x2, y2
 
 def add(x1, y1, x2, y2):
     s = ((y2 - y1) * inverse_mod(x2 - x1, p)) % p 
     x3 = (s**2 - x2 - x1) % p
-    y3 = (s * (x2- x3) - y2) % p 
+    y3 = (s * (x2 - x3) - y2) % p 
     return x3, y3
 
 def bit_to_add(a):
@@ -40,7 +40,7 @@ def bit_to_add(a):
     return d
 
 def double_gen_point(x, y):
-    points = {1:[x, y]}
+    points = {1: [x, y]}
     for i in range(1, r.bit_length()):
         x, y = double(x, y)
         points[2**i] = [x, y]
@@ -60,7 +60,7 @@ def get_pubkey(n):
     else: return 0, 0
 
 
-secret = random.randint(1, r-1)
+secret = random.randint(1, r - 1)
 pubkey = get_pubkey(secret)
 
 print('Secret:', secret)

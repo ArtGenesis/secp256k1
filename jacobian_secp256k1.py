@@ -33,7 +33,7 @@ def bit_to_add(a):
     return d
 
 def double_gen_point(x, y, z):
-    points = {1:[x, y, z]}
+    points = {1: [x, y, z]}
     for i in range(1, r.bit_length()):
         x, y, z = double(x, y, z)
         points[2**i] = [x, y, z]
@@ -55,16 +55,16 @@ def add(Xp, Yp, Zp, Xq, Yq, Zq):
     s1 = (Yp * Zq**3) % p
     s2 = (Yq * Zp**3) % p
     if u1 == u2:
-        if s1 != s2: return(0,0,1)
+        if s1 != s2: return(0, 0, 1)
         return jacobian_double(Xp, Yp, Zp)
     h = u2 - u1
     rs = s2 - s1
     h2 = (h * h) % p
     h3 = (h * h2) % p
     u1h2 = (u1 * h2) % p
-    nx = (rs**2 - h3 - 2*u1h2) % p
-    ny = (rs*(u1h2 - nx) - s1 * h3) % p
-    nz = (h*Zp*Zq) % p
+    nx = (rs**2 - h3 - 2 * u1h2) % p
+    ny = (rs * (u1h2 - nx) - s1 * h3) % p
+    nz = (h * Zp * Zq) % p
     return nx, ny, nz
 
 dbgen = double_gen_point(gx, gy, gz)
@@ -81,7 +81,7 @@ def get_pubkey(n):
     if check : return point
     else: return 0, 0
 
-secret = random.randint(1, r-1)
+secret = random.randint(1, r - 1)
 pubkey = get_pubkey(secret)
 
 print('Secret:', secret)
